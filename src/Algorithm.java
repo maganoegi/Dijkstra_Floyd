@@ -1,10 +1,8 @@
 
 
+public interface Algorithm {
 
-import java.util.ArrayList;
-
-public class Algorithm {
-
+    final static double inf = Double.POSITIVE_INFINITY;
 
     /**
     * Applied algorithm specified through user input. Enum pattern is used to select the right 
@@ -14,12 +12,12 @@ public class Algorithm {
     * @param  distanceMatrix the matrix containing connection graph data
     * @return      2D matrix with the shortest distances between every vertex of the graph
     */
-    static ArrayList<ArrayList<Double>> applyAlgorithm (
+    static double[][] applyAlgorithm (
         String algorithm, 
-        ArrayList<ArrayList<Double>> distanceMatrix
+        double[][] distanceMatrix
     ) throws IllegalArgumentException {
 
-        ArrayList<ArrayList<Double>> resultMatrix;
+        double[][] resultMatrix;
         switch (algorithm) {
             case "dijkstra" : resultMatrix = dijkstra(distanceMatrix); break;
             case "floyd" : resultMatrix = floydWarshall(distanceMatrix); break;
@@ -30,17 +28,36 @@ public class Algorithm {
         return resultMatrix;
     }
 
-    public static ArrayList<ArrayList<Double>> dijkstra(
-        ArrayList<ArrayList<Double>> distanceMatrix
+    public static double[][] dijkstra(
+        double[][] distanceMatrix
     ) {
-        
-        throw new UnsupportedOperationException();
+        double[][] resultingMatrix = distanceMatrix; // TODO: clone it
+        int nbVertices = resultingMatrix.length;
+
+        return resultingMatrix;
     }
 
-    public static ArrayList<ArrayList<Double>> floydWarshall(
-        ArrayList<ArrayList<Double>> distanceMatrix
+    public static double[][] floydWarshall(
+        double[][] distanceMatrix
     ) {
-        throw new UnsupportedOperationException();
+        double[][] resultingMatrix = distanceMatrix; // TODO: clone it, or maybe not
+        int nbVertices = resultingMatrix.length;
+
+        for (int i=0; i < nbVertices; i++) {
+            for (int j=0; j < nbVertices; j++) {
+                for (int k=0; k < nbVertices; k++) {
+                    double ij = resultingMatrix[i][j]; 
+                    double ik = resultingMatrix[i][k]; 
+                    double kj = resultingMatrix[k][j]; 
+                    double sum = ik + kj;
+                    if (ij > sum) {
+                        resultingMatrix[i][j] = sum;
+                    }
+                }
+            }   
+        }
+
+        return resultingMatrix;
     }
 
 
