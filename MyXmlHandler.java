@@ -50,10 +50,6 @@ public class MyXmlHandler {
                         eElement.getElementsByTagName("longitude").item(0).getTextContent().trim()
                     );
 
-                    System.out.println("nom: " + name);  
-                    System.out.println("longitude: " + String.valueOf(longitude)); 
-                    System.out.println("latitude: "+ String.valueOf(latitude)); 
-
                     City city = new City(name, longitude, latitude);
 
                     cities.put(city.name(), city);
